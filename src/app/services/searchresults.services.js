@@ -18,8 +18,10 @@ var SearchResults = (function () {
     }
     SearchResults.prototype.getUserSearchResults = function (value) {
         var url = 'https://api.demo.partaketechnologies.com/api/venue';
-        if (value.length != 0) {
-            url = url + '?q=' + value;
+        var page = 1;
+        var limit = 20;
+        if (value.trim().length != 0) {
+            url = url + '?page=' + page + '&limit=' + limit + '&q=' + value;
         }
         return this.http.get(url)
             .map(function (res) {
@@ -43,7 +45,10 @@ var SearchResults = (function () {
         });
     };
     SearchResults.prototype.getSearchResults = function () {
-        return this.http.get('https://api.demo.partaketechnologies.com/api/venue')
+        var url = 'https://api.demo.partaketechnologies.com/api/venue';
+        // let page=1;
+        // let limit=20;
+        return this.http.get(url)
             .map(function (res) {
             var nRes = res.json();
             var mappedResponse = nRes.map(function (val) {
