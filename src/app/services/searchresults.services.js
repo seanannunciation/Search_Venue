@@ -16,6 +16,32 @@ var SearchResults = (function () {
         this.http = http;
         console.log("Venue page loaded");
     }
+    SearchResults.prototype.getUserSearchResults = function (value) {
+        var url = 'https://api.demo.partaketechnologies.com/api/venue';
+        if (value.length != 0) {
+            url = url + '?q=' + value;
+        }
+        return this.http.get(url)
+            .map(function (res) {
+            var nRes = res.json();
+            var mappedResponse = nRes.map(function (val) {
+                getdistance(val.latitude, val.longitude);
+                function getdistance(lat_val, longt_val) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var current_loc = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                        var search_loc = new google.maps.LatLng(lat_val, longt_val);
+                        var distance_in_metres = google.maps.geometry.spherical.computeDistanceBetween(current_loc, search_loc);
+                        var distance_in_miles = distance_in_metres * 0.000621371192;
+                        val.distance = distance_in_miles.toFixed(2);
+                    }, function () {
+                        alert("Location Unavailable");
+                    });
+                }
+                return val;
+            });
+            return mappedResponse;
+        });
+    };
     SearchResults.prototype.getSearchResults = function () {
         return this.http.get('https://api.demo.partaketechnologies.com/api/venue')
             .map(function (res) {

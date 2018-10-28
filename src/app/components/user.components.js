@@ -14,18 +14,27 @@ var UserComponent = (function () {
     function UserComponent(searchValues) {
         var _this = this;
         this.searchValues = searchValues;
-        // let parameter="Alpine";
+        this.searchResultService = searchValues;
         this.searchValues.getSearchResults().subscribe(function (values) {
             console.log(values);
             _this.searchresults = values;
         });
     }
+    UserComponent.prototype.searchvenues = function (value) {
+        var _this = this;
+        //this.search=value;
+        this.searchResultService.getUserSearchResults(value).subscribe(function (values) {
+            console.log(value);
+            _this.searchresults = values;
+            console.log(_this.searchresults);
+        });
+    };
     return UserComponent;
 }());
 UserComponent = __decorate([
     core_1.Component({
         selector: 'user',
-        template: "\n  <div class=\"venue\">\n  <h1>Select Venue </h1>\n  <input type=\"text\" id=\"inputtext\" placeholder=\"search venues...\"/>\n  <button id=\"search\">Go</button>\n  <div id=\"output\">\n    <div class=\"col\" id=\"venue_list\" *ngFor=\"let value of searchresults\">\n      <img class=\"card-img-top\" src=\"{{value.imageUrl}}\" alt=\"Venue Image\">\n      <p class=\"card-text\">{{value.name}}</p>\n      <div class=\"location\">\n      <p class=\"card-text location\">{{value.location}} | {{value.distance}} mi</p>\n      </div>\n    </div>\n  </div>\n  </div>\n    ",
+        template: "\n  <div class=\"venue\">\n  <h1>Select Venue </h1>\n  <input type=\"text\" id=\"inputtext\" (keyup)=\"searchvenues($event.target.value)\" placeholder=\"search venues...\"/>\n    <div class=\"col\" id=\"venue_list\" *ngFor=\"let value of searchresults\">\n      <img class=\"card-img-top\" src=\"{{value.imageUrl}}\" alt=\"Venue Image\">\n      <p class=\"card-text\">{{value.name}}</p>\n      <p class=\"location\">{{value.location}} | {{value.distance}} mi</p>\n    </div>\n  </div>\n    ",
         providers: [searchresults_services_1.SearchResults]
     }),
     __metadata("design:paramtypes", [searchresults_services_1.SearchResults])
