@@ -22,7 +22,8 @@ var SearchResults = (function () {
         var page = 1;
         var limit = 20;
         if (value.trim().length != 0) {
-            url = url + '?page=' + page + '&limit=' + limit + '&q=' + value;
+            // url=url+'?page='+page+'&limit='+limit+'&q='+value;
+            url = url + '?q=' + value;
         }
         return this.http.get(url)
             .map(function (res) {

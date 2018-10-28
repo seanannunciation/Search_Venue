@@ -13,8 +13,10 @@ export class SearchResults {
     let url = 'https://api.demo.partaketechnologies.com/api/venue';
     let page=1;
     let limit=20;
+
     if(value.trim().length!=0){
-      url=url+'?page='+page+'&limit='+limit+'&q='+value;
+      // url=url+'?page='+page+'&limit='+limit+'&q='+value;
+      url=url+'?q='+value;
         }
     return this.http.get(url)
       .map(res=>{
