@@ -72,13 +72,21 @@ h1{
     /* For mobile */
     [class*="card-"] {
         width: 100%;
+        margin: 0rem auto;
     }
     .card-img-top{
       height:150pt;
+      width: 100%;
     }
 
     #inputtext{
-      width: 90%;
+      width: 94%;
       height:20pt;
+    }
+    .col{
+      padding: 1.3rem 0rem;
+    }
+    .venue h1{
+    text-align: center;
     }
 }
