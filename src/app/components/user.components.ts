@@ -22,14 +22,16 @@ export class UserComponent  {
    searchresults : Searchval[];
    private searchResultService;
 
+//obtain values from the api call to display
    constructor(private searchValues : SearchResults){
      this.searchResultService = searchValues;
      this.searchValues.getSearchResults().subscribe(values => {
        console.log(values);
        this.searchresults = values;
-
      });
    }
+
+   // pass user input search value to get search results for the respective value
    private searchvenues(value : string ){
        this.searchResultService.getUserSearchResults(value).subscribe(values => {
        console.log(value);

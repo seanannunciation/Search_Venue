@@ -16,6 +16,7 @@ var SearchResults = (function () {
         this.http = http;
         console.log("Venue page loaded");
     }
+    //function to get the user entered search results
     SearchResults.prototype.getUserSearchResults = function (value) {
         var url = 'https://api.demo.partaketechnologies.com/api/venue';
         var page = 1;
@@ -30,6 +31,7 @@ var SearchResults = (function () {
                 getdistance(val.latitude, val.longitude);
                 function getdistance(lat_val, longt_val) {
                     navigator.geolocation.getCurrentPosition(function (position) {
+                        // console.log(new google.maps.LatLng(position.coords.latitude,position.coords.longitude));
                         var current_loc = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                         var search_loc = new google.maps.LatLng(lat_val, longt_val);
                         var distance_in_metres = google.maps.geometry.spherical.computeDistanceBetween(current_loc, search_loc);
@@ -44,6 +46,7 @@ var SearchResults = (function () {
             return mappedResponse;
         });
     };
+    //function to display search results
     SearchResults.prototype.getSearchResults = function () {
         var url = 'https://api.demo.partaketechnologies.com/api/venue';
         // let page=1;

@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var searchresults_services_1 = require("../services/searchresults.services");
 var UserComponent = (function () {
+    //obtain values from the api call to display
     function UserComponent(searchValues) {
         var _this = this;
         this.searchValues = searchValues;
@@ -20,6 +21,7 @@ var UserComponent = (function () {
             _this.searchresults = values;
         });
     }
+    // pass user input search value to get search results for the respective value
     UserComponent.prototype.searchvenues = function (value) {
         var _this = this;
         this.searchResultService.getUserSearchResults(value).subscribe(function (values) {
